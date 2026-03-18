@@ -3,7 +3,7 @@ import { test as base, chromium } from '@playwright/test';
 const test = base.extend({
   page: async ({ }, use) => {
     const browser = await chromium.launch({
-      headless: false, // Run in headed mode for better debugging
+      headless: process.env.CI ? true : false, // Run headless in CI, headed locally
       args: [
         '--disable-blink-features=AutomationControlled',
         '--disable-features=IsolateOrigins,site-per-process',
