@@ -25,6 +25,7 @@ test('Explore login page structure', async ({ page }) => {
       const name = await input.getAttribute('name');
       const id = await input.getAttribute('id');
       const placeholder = await input.getAttribute('placeholder');
+      console.log("Srivatsa")
       console.log(`Input ${i + 1}:`, { type, name, id, placeholder });
     }
 
