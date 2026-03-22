@@ -12,36 +12,29 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Install Node.js dependencies
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Install Playwright Browsers') {
             steps {
                 // Install Playwright browsers
-                sh 'npx playwright install'
+                bat 'npx playwright install'
             }
         }
 
         stage('Run Tests in Chrome') {
             steps {
                 // Run Playwright tests specifically for Chromium (Chrome)
-                sh 'npx playwright test --project=chromium'
+                bat 'npx playwright test --project=chromium'
             }
         }
     }
 
     post {
         always {
-            // Publish Playwright HTML report
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'playwright-report',
-                reportFiles: 'index.html',
-                reportName: 'Playwright Report'
-            ])
+            // Archive test results or reports if needed
+            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
         }
     }
 }
