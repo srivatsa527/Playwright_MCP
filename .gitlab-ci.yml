@@ -8,7 +8,7 @@ test:
     - npm ci
   script:
     - npx playwright install --with-deps
-    - npx playwright test --reporter=junit
+    - npx playwright test --reporter=junit,test-results/junit.xml
   artifacts:
     reports:
       junit: test-results/junit.xml
