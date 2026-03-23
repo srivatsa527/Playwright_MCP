@@ -1,0 +1,18 @@
+stages:
+  - test
+
+test:
+  stage: test
+  image: node:18
+  before_script:
+    - npm ci
+  script:
+    - npx playwright install --with-deps
+    - npx playwright test --reporter=junit
+  artifacts:
+    reports:
+      junit: test-results/junit.xml
+    paths:
+      - playwright-report/
+      - test-results/
+    expire_in: 1 week
